@@ -7,7 +7,7 @@
 
   tasks:
 
-  - name: install packages
+  - name: "install packages"
     ansible.builtin.yum:
       name: 
       - python3-policycoreutils
@@ -20,7 +20,7 @@
       - gcc-c++
       - libcurl-devel.x86_64
       - rpm-build
-    state: present
+      state: present
 
   - name: Ensure SELinux is in enforcing mode
     ansible.posix.selinux:
