@@ -163,7 +163,7 @@ int main()
         // iterate over the list of Red Hat offices and get the weather for each
         for ( int i=0; offices[i] != NULL; i++ )
         {
-            curlUrl( ( "http://wttr.in?%sformat=3", offices[i]), sizeof( ( "http://wttr.in?%sformat=3", offices[i]) ) );
+            curlUrl( ( "https://wttr.in?%sformat=3", offices[i]), sizeof( ( "http://wttr.in?%sformat=3", offices[i]) ) );
             sleep(delay);
         }
 
