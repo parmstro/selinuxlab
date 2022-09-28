@@ -17,8 +17,8 @@
 #include <string>
 #include <curl/curl.h>
 #define MAXHOSTNAME 256
-#define DESTURL "http://wttr.in/"
-#define DESTURLEND "?format=3"
+#define DESTURL "https://wttr.in/"
+#define DESTURLEND "?format=4"
 using namespace std;
 
 const char* offices[] = {
@@ -163,7 +163,7 @@ int main()
         // iterate over the list of Red Hat offices and get the weather for each
         for ( int i=0; offices[i] != NULL; i++ )
         {
-            curlUrl( ( "https://wttr.in?%sformat=3", offices[i]), sizeof( ( "http://wttr.in?%sformat=3", offices[i]) ) );
+            curlUrl( ( "https://wttr.in?%sformat=3", offices[i]), sizeof( ( "https://wttr.in?%sformat=4", offices[i]) ) );
             sleep(delay);
         }
 
