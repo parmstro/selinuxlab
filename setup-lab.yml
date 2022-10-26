@@ -218,8 +218,3 @@
       cmd: "make install -f /root/selinuxlab/Makefile"
       chdir: /root/selinuxlab
 
-  - name: Reboot host
-    shell: sleep 10 && /sbin/shutdown -r now
-    async: 300
-    poll: 0
-    become: true

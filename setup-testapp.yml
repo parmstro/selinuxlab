@@ -3,7 +3,6 @@
   name: Prepares an SELinux workshop
   become: yes
   become_method: sudo
-  remote_user: ec2-user
 
   tasks:
 
