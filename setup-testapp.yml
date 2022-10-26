@@ -2,7 +2,7 @@
 - hosts: all
   name: Prepares an SELinux workshop
   become: yes
-  become_method: sudo
+  remote_user: root
 
   tasks:
 
@@ -22,9 +22,8 @@
       state: present
 
   - name: Ensure SELinux is in enforcing mode
-    ansible.posix.selinux:
-      policy: targeted
-      state: enforcing
+    ansible.builtin.command:
+      cmd: setenforce enforcing
 
   - name: Create dir with working files
     ansible.builtin.file:
