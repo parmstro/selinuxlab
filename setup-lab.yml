@@ -10,13 +10,20 @@
       name: '*'
       state: latest
 
+  - name: Enable the Code Ready Builder repo
+    command: subscription-manager repos --enable codeready-builder-for-rhel-9-$(arch)-rpms
+
+  - name: Enable the EPEL repositories
+    command: dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
+    
   - name: install packages
     ansible.builtin.yum:
       name: "{{ item }}"
       state: present
     with_items:
-      - libselinux-python
-      - policycoreutils-python
+      - checkpolicy
+      - python3-libselinux
+      - python3-policycoreutils
       - policycoreutils-devel
       - policycoreutils-newrole
       - selinux-policy-doc
@@ -34,7 +41,7 @@
       - rpm-build
       - firewalld
       - audit
-
+  
   - name: Create a Samba Config
     ansible.builtin.copy:
       src: files/smb.conf
@@ -85,8 +92,9 @@
       mode: 0666
 
   - name: Ensure SELinux is in enforcing mode
-    ansible.builtin.command:
-      cmd: setenforce enforcing
+    ansible.posix.selinux:
+      policy: targeted
+      state: enforcing
 
   - name: Add a SMB user "tester" with the password "tester"
     ansible.builtin.shell: printf "tester\ntester\n" | smbpasswd -a -s tester
@@ -115,7 +123,7 @@
       state: started
       enabled: yes
 
-  - name: Ensure NFS is enabled and running
+  - name: Ensure tomcat is enabled and running
     ansible.builtin.service: 
       name: tomcat
       state: started
@@ -128,13 +136,13 @@
       enabled: yes
 
   - name: Open firewalld on port 8080/tcp
-    ansible.builtin.firewalld:
+    ansible.posix.firewalld:
       port: 8080/tcp
       state: enabled
       permanent: true
 
   - name: Open firewalld for our services
-    ansible.builtin.firewalld:
+    ansible.posix.firewalld:
       service: "{{ item }}"
       state: enabled
       permanent: true

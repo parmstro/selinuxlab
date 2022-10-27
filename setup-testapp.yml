@@ -22,8 +22,9 @@
       state: present
 
   - name: Ensure SELinux is in enforcing mode
-    ansible.builtin.command:
-      cmd: setenforce enforcing
+    ansible.posix.selinux:
+      policy: targeted
+      state: enforcing
 
   - name: Create dir with working files
     ansible.builtin.file:
