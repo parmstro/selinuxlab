@@ -14,7 +14,7 @@
     command: subscription-manager repos --enable codeready-builder-for-rhel-9-x86_64-rpms
 
   - name: Enable the EPEL repositories
-    command: dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
+    command: dnf -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
 
   - name: install packages
     ansible.builtin.yum:
@@ -113,7 +113,7 @@
 
   - name: Ensure NFS is enabled and running
     ansible.builtin.service: 
-      name: nfs
+      name: nfs-server
       state: started
       enabled: yes
 
