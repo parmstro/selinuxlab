@@ -11,11 +11,11 @@
       state: latest
 
   - name: Enable the Code Ready Builder repo
-    command: subscription-manager repos --enable codeready-builder-for-rhel-9-$(arch)-rpms
+    command: subscription-manager repos --enable codeready-builder-for-rhel-9-x86_64-rpms
 
   - name: Enable the EPEL repositories
     command: dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
-    
+
   - name: install packages
     ansible.builtin.yum:
       name: "{{ item }}"
