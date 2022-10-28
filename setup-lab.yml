@@ -55,7 +55,7 @@
 
   - name: Create a NFS config
     ansible.builtin.file:
-      path: files/exports
+      path: /etc/sysconfig/nfs
       state: touch
 
   - name: Enable NFS v4.2
