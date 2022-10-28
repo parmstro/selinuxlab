@@ -75,8 +75,14 @@
     ansible.builtin.user:
       name: tester
       shell: /bin/bash
+      create_home: yes
       password: tester
   
+  - name: Add the vimrc file
+    ansible.builtin.copy:
+      src: files/.vimrc
+      dest: /home/tester/
+
   - name: copy mail.php
     ansible.builtin.copy: 
       src: files/mail.php
