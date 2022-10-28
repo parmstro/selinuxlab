@@ -14,9 +14,8 @@
     command: subscription-manager repos --enable codeready-builder-for-rhel-9-x86_64-rpms
 
   - name: Enable the EPEL repositories
-    ansible.builtin.yum: 
-      name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
-      state: present
+    command: yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
+  
 
   # This should be faster because it should be one dnf transaction
   - name: install packages
@@ -47,12 +46,17 @@
   - name: Create a Samba Config
     ansible.builtin.copy:
       src: files/smb.conf
-      dest: /etc/samba/smb.conf
+      dest: /etc/samba/
 
   - name: Create a NFS config
     ansible.builtin.copy:
       src: files/exports
       dest: /etc/exports
+
+  - name: Create a NFS config
+    ansible.builtin.file:
+      path: files/exports
+      state: touch
 
   - name: Enable NFS v4.2
     ansible.builtin.lineinfile:
