@@ -80,7 +80,7 @@
       name: tester
       shell: /bin/bash
       create_home: yes
-      password: tester
+      password: "$5$pq7bLC22XEf7nUj4$llpkenQTUUWv8GIMHVSmrVGZfffHyb0cX/4SIDEwPq1"
   
   - name: Add the vimrc file
     ansible.builtin.copy:
