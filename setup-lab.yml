@@ -78,6 +78,8 @@
   - name: Add a "tester" user with password "tester"
     ansible.builtin.user:
       name: tester
+      groups:
+        - wheel
       shell: /bin/bash
       create_home: yes
       password: "$5$pq7bLC22XEf7nUj4$llpkenQTUUWv8GIMHVSmrVGZfffHyb0cX/4SIDEwPq1"
